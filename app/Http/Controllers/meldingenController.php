@@ -6,6 +6,7 @@ $capaciteit = $_POST['capaciteit'];
 $melder = $_POST['melder'];
 $type = $_POST['type'];
 $overig = $_POST['overig'];
+$gemeld_op = $_POST['gemeld_op'];
 if(isset($_POST['prioriteit'])){
     $prioriteit = 1;
 }
@@ -39,7 +40,7 @@ if(isset($errors)) {
 require_once '../../../config/conn.php';
 
 //2. Query
-$query="INSERT INTO meldingen (attractie, capaciteit, melder, prioriteit, type, overige_info) VALUES(:attractie, :capaciteit, :melder, :prioriteit, :type, :overige_info)";
+$query="INSERT INTO meldingen (attractie, capaciteit, melder, prioriteit, type, overige_info, gemeld_op) VALUES(:attractie, :capaciteit, :melder, :prioriteit, :type, :overige_info, :gemeld_op)";
 
 //3. Prepare
 $statement = $conn->prepare($query);
@@ -51,6 +52,8 @@ $statement->execute([
     ":melder" => $melder,
     ":prioriteit" => $prioriteit,
     ":type"  => $type,
+    "gemeld_op" => $gemeld_op,
+    
     ":overige_info"  => $overig
     ]);
 
