@@ -17,6 +17,12 @@
 
     </div>
 
+    <?php
+        $naam = "Sem";
+    ?>
+
+    <h1><?php echo "hallo " . $naam; ?></h1>
+
 </body>
 
 </html>
