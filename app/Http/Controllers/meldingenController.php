@@ -63,5 +63,39 @@ $statement->execute([
 }
 
 if($action == "edit") {
-    echo "edit";
+$attractie = $_POST['attractie'];
+$capaciteit = $_POST['capaciteit'];
+$melder = $_POST['melder'];
+$overig = $_POST['overig'];
+$id = $_POST['id'];
+if(isset($_POST['prioriteit'])){
+    $prioriteit = 1;
+}
+else{
+    $prioriteit = 0;
+}
+
+//1. Verbinding
+require_once '../../../config/conn.php';
+
+//2. Query
+$query="UPDATE meldingen SET attractie = :attractie, capaciteit = :capaciteit,
+        melder = :melder, prioriteit = :prioriteit, overige_info = :overig
+        WHERE id = :id
+";
+
+//3. Prepare
+$statement = $conn->prepare($query);
+
+//4. Execute
+$statement->execute([
+    ":attractie" => $attractie,
+    ":capaciteit" => $capaciteit,
+    ":melder" => $melder,
+    ":prioriteit" => $prioriteit,
+    ":overig"  => $overig,
+    ":id"  => $id
+    ]);
+
+    header("Location: ../../../resources/views/meldingen/index.php?msg=Melding is aangepast");
 }
