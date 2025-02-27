@@ -1,6 +1,10 @@
 <?php
 
 //Variabelen vullen
+$action = $_POST['action'];
+
+if($action == "create") {
+
 $attractie = $_POST['attractie'];
 $capaciteit = $_POST['capaciteit'];
 $melder = $_POST['melder'];
@@ -40,7 +44,7 @@ if(isset($errors)) {
 require_once '../../../config/conn.php';
 
 //2. Query
-$query="INSERT INTO meldingen (attractie, capaciteit, melder, prioriteit, type, overige_info, gemeld_op) VALUES(:attractie, :capaciteit, :melder, :prioriteit, :type, :overige_info, :gemeld_op)";
+$query="INSERT INTO meldingen (attractie, capaciteit, melder, prioriteit, type, overige_info) VALUES(:attractie, :capaciteit, :melder, :prioriteit, :type, :overige_info)";
 
 //3. Prepare
 $statement = $conn->prepare($query);
@@ -52,9 +56,12 @@ $statement->execute([
     ":melder" => $melder,
     ":prioriteit" => $prioriteit,
     ":type"  => $type,
-    "gemeld_op" => $gemeld_op,
-    
     ":overige_info"  => $overig
     ]);
 
     header("Location: ../../../resources/views/meldingen/index.php?msg=Melding opgeslagen");
+}
+
+if($action == "edit") {
+    echo "edit";
+}
