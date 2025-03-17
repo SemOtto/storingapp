@@ -8,7 +8,12 @@
             <a href="<?php echo $base_url; ?>/resources/views/meldingen/index.php">Meldingen</a>
         </nav>
         <div>
-            <a href="#" style="color: lightgrey;">Inloggen</a>
+            <?php
+            if (isset($_SESSION['userid'])): ?>
+                <p><a href="/resources/views/logout/logout.php" style="color: lightgrey;">Uitloggen</a></p>
+            <?php else: ?>
+                <p><a href="/resources/views/login/login.php" style="color: lightgray;">Inloggen</a></p>
+            <?php endif; ?>
         </div>
     </div>
 </header>

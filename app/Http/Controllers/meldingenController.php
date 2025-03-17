@@ -1,4 +1,14 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['userid'])) {
+    $msg = "Je moet ingelogd zijn om deze pagina te zien!";
+    header("Location: ../login/login.php?msg=.$msg");
+}
+
+?>
+
+<?php
 
 //Variabelen vullen
 $action = $_POST['action'];
